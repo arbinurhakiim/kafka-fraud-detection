@@ -1,0 +1,27 @@
+{
+  "name": "mysql-transactions-source-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max": "1",
+    "database.history.skip.unparseable.ddl": "true",
+    "database.connectionTimeZone": "UTC",
+    "database.ssl.mode": "disabled",
+    "include.schema.changes": "false",
+    "binlog.transaction.gtid.set.skip": "true",
+    "database.enable.binlog.position.finder.fallback": "true",
+    "database.mysql.version": "8.0",
+    "database.connection.adapter": "mysql",
+    "database.allowPublicKeyRetrieval": "true",
+    "database.hostname": "mysql",
+    "database.port": "3306",
+    "database.user": "root",
+    "database.password": "root",
+    "database.server.name": "mysql",
+    "database.server.id": "123456",
+    "table.include.list": "fraud.transactions",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka-1:19092,kafka-2:19092,kafka-3:19092",
+    "schema.history.internal.kafka.topic": "schema.history.transactions",
+    "topic.prefix": "mysql",
+    "column.exclude.list": "fraud.transactions.created_at, fraud.transactions.updated_at"
+  }
+}

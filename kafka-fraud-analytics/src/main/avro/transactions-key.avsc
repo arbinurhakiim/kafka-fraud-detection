@@ -1,0 +1,10 @@
+{
+  "type":"record",
+  "name":"Key",
+  "namespace":"mysql.fraud.transactions",
+  "fields":[
+    {"name":"id",
+    "type":"long"}
+  ],
+  "connect.name":"mysql.fraud.transactions.Key"
+}

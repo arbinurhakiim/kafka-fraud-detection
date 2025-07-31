@@ -1,0 +1,201 @@
+{
+  "type": "record",
+  "name": "Envelope",
+  "namespace": "mysql.fraud.transactions",
+  "fields": [
+    {
+      "name": "before",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "Value",
+          "fields": [
+            {
+              "name": "amount",
+              "type": "int"
+            },
+            {
+              "name": "id",
+              "type": "long"
+            },
+            {
+              "name": "order_id",
+              "type": "long"
+            },
+            {
+              "name": "user_id",
+              "type": "long"
+            },
+            {
+              "name": "status",
+              "type": {
+                "type": "string",
+                "connect.version": 1,
+                "connect.parameters": {
+                  "allowed": "FAILED,PENDING,SUCCESS"
+                },
+                "connect.name": "io.debezium.data.Enum"
+              }
+            }
+          ],
+          "connect.name": "mysql.fraud.transactions.Value"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "after",
+      "type": [
+        "null",
+        "Value"
+      ],
+      "default": null
+    },
+    {
+      "name": "source",
+      "type": {
+        "type": "record",
+        "name": "Source",
+        "namespace": "io.debezium.connector.mysql",
+        "fields": [
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "connector",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "ts_ms",
+            "type": "long"
+          },
+          {
+            "name": "snapshot",
+            "type": [
+              {
+                "type": "string",
+                "connect.version": 1,
+                "connect.parameters": {
+                  "allowed": "true,last,false,incremental"
+                },
+                "connect.default": "false",
+                "connect.name": "io.debezium.data.Enum"
+              },
+              "null"
+            ],
+            "default": "false"
+          },
+          {
+            "name": "db",
+            "type": "string"
+          },
+          {
+            "name": "sequence",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "table",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "server_id",
+            "type": "long"
+          },
+          {
+            "name": "gtid",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "file",
+            "type": "string"
+          },
+          {
+            "name": "pos",
+            "type": "long"
+          },
+          {
+            "name": "row",
+            "type": "int"
+          },
+          {
+            "name": "thread",
+            "type": [
+              "null",
+              "long"
+            ],
+            "default": null
+          },
+          {
+            "name": "query",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ],
+        "connect.name": "io.debezium.connector.mysql.Source"
+      }
+    },
+    {
+      "name": "op",
+      "type": "string"
+    },
+    {
+      "name": "ts_ms",
+      "type": [
+        "null",
+        "long"
+      ],
+      "default": null
+    },
+    {
+      "name": "transaction",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "block",
+          "namespace": "event",
+          "fields": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "total_order",
+              "type": "long"
+            },
+            {
+              "name": "data_collection_order",
+              "type": "long"
+            }
+          ],
+          "connect.version": 1,
+          "connect.name": "event.block"
+        }
+      ],
+      "default": null
+    }
+  ],
+  "connect.version": 1,
+  "connect.name": "mysql.fraud.transactions.Envelope"
+}

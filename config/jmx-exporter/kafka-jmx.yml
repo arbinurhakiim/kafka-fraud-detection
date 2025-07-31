@@ -1,0 +1,36 @@
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+  # Kafka broker metrics
+  - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
+    name: kafka_server_$1_$2
+    type: GAUGE
+    labels:
+      clientId: "$3"
+      topic: "$4"
+      partition: "$5"
+  - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), brokerHost=(.+), brokerPort=(.+)><>Value
+    name: kafka_server_$1_$2
+    type: GAUGE
+    labels:
+      clientId: "$3"
+      broker: "$4:$5"
+
+  # JVM metrics
+  - pattern: java.lang<type=(.+), name=(.+)><>(\w+)
+    name: java_lang_$1_$2_$3
+    type: GAUGE
+
+  # Kafka consumer group metrics
+  - pattern: kafka.consumer<type=(.+), client-id=(.+)><>(\w+)
+    name: kafka_consumer_$1_$3
+    type: GAUGE
+    labels:
+      client_id: "$2"
+
+  # Kafka producer metrics
+  - pattern: kafka.producer<type=(.+), client-id=(.+)><>(\w+)
+    name: kafka_producer_$1_$3
+    type: GAUGE
+    labels:
+      client_id: "$2"
